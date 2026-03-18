@@ -1,0 +1,142 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Just Build",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "command": "just build",
+            "problemMatcher": [
+                "$gcc"
+            ],
+        },
+        {
+            "label": "West Espressif Build",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                // "isDefault": true
+            },
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "command": "${userHome}/venv/bin/python -m west build -p always -b esp32s3_devkitc/esp32s3/procpu -- -DDTC_OVERLAY_FILE=boards/esp32s3_devkitc.overlay",
+            // -t menuconfig" 
+            // "args": [
+            //   " -m",
+            //   "west",
+            //   "build",
+            //   "-p",
+            //   "auto",
+            //   "-b",
+            //   "nrf52840dk_nrf52840"
+            // ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+        },
+        {
+            "label": "West Configurable Build",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "command": "${userHome}/venv/bin/python -m west",
+            // -t menuconfig" 
+            "args": [
+                "build",
+                "-p",
+                "${input:pristine}",
+                "-b",
+                "${input:board}",
+                "--",
+                "-DDTC_OVERLAY_FILE=boards/esp32s3_devkitc.overlay",
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+        },
+        {
+            "label": "West Build",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+            },
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            // "command": "pwd",
+            "command": "${userHome}/venv/bin/python -m west build -p auto -b nrf52840dk_nrf52840",
+            // "args": [
+            //   " -m",
+            //   "west",
+            //   "build",
+            //   "-p",
+            //   "auto",
+            //   "-b",
+            //   "nrf52840dk_nrf52840"
+            // ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+        },
+        {
+            "label": "West Configurable Build",
+            "type": "shell",
+            "group": {
+                "kind": "build",
+            },
+            "command": "${userHome}/zephyrproject/.venv/bin/west",
+            "args": [
+                "build",
+                "-p",
+                "${input:pristine}",
+                "-b",
+                "${input:board}"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        },
+        {
+            "label": "West Flash",
+            "type": "shell",
+            "command": "${userHome}/zephyrproject/.venv/bin/west",
+            "args": [
+                "flash"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ]
+        }
+    ],
+    "inputs": [
+        {
+            "id": "board",
+            "type": "promptString",
+            "default": "nrf52840dk_nrf52840",
+            "description": "See https://docs.zephyrproject.org/latest/boards/index.html"
+        },
+        {
+            "id": "pristine",
+            "type": "pickString",
+            "description": "Choose when to run a pristine build",
+            "default": "auto",
+            "options": [
+                "auto",
+                "always",
+                "never"
+            ]
+        }
+    ]
+}
