@@ -1,0 +1,56 @@
+{
+  "name": "LVGL Emscripten",
+  "image": "docker.io/emscripten/emsdk:latest",
+  "containerEnv": {
+    "TERM": "${localEnv:TERM:xterm-256color}",
+    "GIT_CONFIG_COUNT": "1",
+    "GIT_CONFIG_KEY_0": "safe.directory",
+    "GIT_CONFIG_VALUE_0": "*"
+  },
+  "runArgs": [
+    // Rootless podman
+    "--userns=keep-id:uid=1000,gid=1000"
+  ],
+  "mounts": [
+    "source=emscripten-sdl2,target=/emsdk/upstream/emscripten/cache/ports/sdl2,type=volume",
+    "source=${localWorkspaceFolder}/.devcontainer/config/.bashrc,target=/root/.bashrc,type=bind,consistency=cached"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.cmake-tools",
+        "ms-vscode.cpptools-themes",
+        "usernamehw.errorlens",
+        "skellock.just",
+        "redhat.vscode-yaml"
+      ],
+      "settings": {
+        // Use emcmake from terminal — CMake Tools can't invoke it automatically
+        "cmake.configureOnOpen": false,
+        "cmake.ignoreCMakeListsMissing": true,
+        "redhat.telemetry.enabled": false,
+        "editor.formatOnSave": true,
+        "[c]": {
+          "editor.defaultFormatter": "ms-vscode.cpptools"
+        },
+        "[jsonc]": {
+          "editor.defaultFormatter": "vscode.json-language-features"
+        },
+        "[yaml]": {
+          "editor.defaultFormatter": "redhat.vscode-yaml"
+        },
+        "files.associations": {
+          "*.just": "just",
+          "*.conf": "properties"
+        },
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash"
+          }
+        }
+      }
+    }
+  }
+}
