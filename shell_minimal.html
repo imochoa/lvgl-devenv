@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>LVGL Simulator</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #1a1a2e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: system-ui, -apple-system, sans-serif;
+            color: #ccc;
+        }
+        h1 {
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 0.75rem;
+            opacity: 0.6;
+        }
+        canvas {
+            border: 2px solid #333;
+            border-radius: 6px;
+            image-rendering: pixelated;
+        }
+        #status {
+            margin-top: 0.75rem;
+            font-size: 0.75rem;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body>
+    <h1>LVGL Simulator &mdash; 160 x 80 @ 4x</h1>
+    <canvas id="canvas" oncontextmenu="event.preventDefault()" tabindex="-1"></canvas>
+    <div id="status">Loading WASM...</div>
+    <script>
+        var Module = {
+            canvas: document.getElementById('canvas'),
+            onRuntimeInitialized: function () {
+                document.getElementById('status').textContent = 'Running';
+            }
+        };
+    </script>
+    {{{ SCRIPT }}}
+</body>
+</html>
