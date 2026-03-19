@@ -2,18 +2,18 @@
     "version": 4,
     "configurations": [
         {
-            "name": "LVGL Emscripten",
-            "cStandard": "c11",
-            "configurationProvider": "ms-vscode.cmake-tools",
-            "includePath": [
-                "${workspaceFolder}",
-                "${workspaceFolder}/shared",
-                "${workspaceFolder}/_deps/lvgl-src",
-                "${workspaceFolder}/_deps/lvgl-src/src"
-            ],
-            "defines": [
-                "LV_CONF_INCLUDE_SIMPLE"
-            ]
+            "name": "LVGL Emscripten Point to CMake Tools",
+            // "cStandard": "c11",
+            "configurationProvider": "ms-vscode.cmake-tools"
+            // "includePath": [
+            //     "${workspaceFolder}",
+            //     "${workspaceFolder}/shared",
+            //     "${workspaceFolder}/_deps/lvgl-src",
+            //     "${workspaceFolder}/_deps/lvgl-src/src"
+            // ],
+            // "defines": [
+            //     "LV_CONF_INCLUDE_SIMPLE"
+            // ]
         }
     ]
 }

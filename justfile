@@ -41,7 +41,16 @@ dev:
         --entrypoint bash \
         docker.io/emscripten/emsdk:latest
 
+# find ./build/default -type f -iname "*.html" -print0 | xargs -0 printf "%s\n"
+
 # Serve an app: just server hello_world
-serve app="hello_world":
-    printf "%s\n" "http://127.0.0.1:35729/{{ app }}/{{ app }}.html"
-    uvx livereload --port 35729 "./build/apps"
+serve app="epaper" configure="default" port="35729":
+    #!/usr/bin/env bash
+    pushd "./build/{{ configure }}/apps" 2>&1>/dev/null
+    # find . -type f -iname "*.html" -print0 | xargs -0 printf "http://127.0.0.1:35729/%s\n"
+    # fd -ehtml . "./build/{{ configure }}/apps" -x printf "http://127.0.0.1:{{ port }}/{//}/{/}\n"
+    # fd -ehtml . "build/{{ configure }}/apps" -x printf "http://127.0.0.1:{{ port }}/{}\n"
+    fd -ehtml  | xargs printf "http://127.0.0.1:35729/%s\n"
+    # printf "%s\n" "http://127.0.0.1:{{ port }}/{{ app }}/{{ app }}.html"
+    # uvx livereload --port {{ port }} "./build/{{ configure }}/apps"
+    uvx livereload --port {{ port }} "."

@@ -2,8 +2,8 @@
     "version": 3,
     "configurePresets": [
         {
-            "name": "emcmake",
-            "description": "",
+            "name": "default",
+            "description": "My LVGL development environment",
             "hidden": false,
             "generator": "Unix Makefiles",
             "binaryDir": "${workspaceFolder}/build/${presetName}",
