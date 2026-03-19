@@ -31,8 +31,8 @@
    backed by k_malloc; here we use libc) */
 #define LV_MEM_CUSTOM 1
 #define LV_MEM_CUSTOM_INCLUDE <stdlib.h>
-#define LV_MEM_CUSTOM_ALLOC   malloc
-#define LV_MEM_CUSTOM_FREE    free
+#define LV_MEM_CUSTOM_ALLOC malloc
+#define LV_MEM_CUSTOM_FREE free
 #define LV_MEM_CUSTOM_REALLOC realloc
 
 /*====================
@@ -59,16 +59,16 @@
 #define LV_USE_LOG 0
 
 /* Asserts */
-#define LV_USE_ASSERT_NULL          1
-#define LV_USE_ASSERT_MALLOC        1
-#define LV_USE_ASSERT_STYLE         0
+#define LV_USE_ASSERT_NULL 1
+#define LV_USE_ASSERT_MALLOC 1
+#define LV_USE_ASSERT_STYLE 0
 #define LV_USE_ASSERT_MEM_INTEGRITY 0
-#define LV_USE_ASSERT_OBJ           0
+#define LV_USE_ASSERT_OBJ 0
 
 /* Show FPS / CPU — handy while iterating */
 #define LV_USE_PERF_MONITOR 1
 #if LV_USE_PERF_MONITOR
-    #define LV_USE_PERF_MONITOR_POS LV_ALIGN_BOTTOM_RIGHT
+#define LV_USE_PERF_MONITOR_POS LV_ALIGN_BOTTOM_RIGHT
 #endif
 
 #define LV_USE_USER_DATA 1
@@ -91,12 +91,12 @@
  *================*/
 
 /* Enable only the widgets the demo app uses (matches prj.conf) */
-#define LV_USE_LABEL      1
+#define LV_USE_LABEL 1
 #if LV_USE_LABEL
-    #define LV_LABEL_TEXT_SELECTION 1
-    #define LV_LABEL_LONG_TXT_HINT 1
+#define LV_LABEL_TEXT_SELECTION 1
+#define LV_LABEL_LONG_TXT_HINT 1
 #endif
-#define LV_USE_LINE       1
+#define LV_USE_LINE 1
 
 /*==================
  * EXTRA COMPONENTS
@@ -105,9 +105,9 @@
 /* Themes — keep default theme for sensible styling */
 #define LV_USE_THEME_DEFAULT 1
 #if LV_USE_THEME_DEFAULT
-    #define LV_THEME_DEFAULT_DARK 0
-    #define LV_THEME_DEFAULT_GROW 1
-    #define LV_THEME_DEFAULT_TRANSITION_TIME 80
+#define LV_THEME_DEFAULT_DARK 0
+#define LV_THEME_DEFAULT_GROW 1
+#define LV_THEME_DEFAULT_TRANSITION_TIME 80
 #endif
 
 #define LV_USE_THEME_BASIC 1
@@ -117,6 +117,6 @@
 #define LV_USE_GRID 1
 
 /* Don't build bundled examples/demos */
-#define LV_BUILD_EXAMPLES 0
+#define LV_BUILD_EXAMPLES 1
 
 #endif /* LV_CONF_H */
