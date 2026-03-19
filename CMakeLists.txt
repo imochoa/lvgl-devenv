@@ -22,28 +22,22 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(lvgl)
 
 # ---------------------------------------------------------------------------
-# Simulator executable
-# ---------------------------------------------------------------------------
-add_executable(lvgl_sim main_sim.c)
-target_include_directories(lvgl_sim PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}")
-target_link_libraries(lvgl_sim PRIVATE lvgl)
-
-# ---------------------------------------------------------------------------
-# Emscripten / SDL2 configuration
+# Platform setup  (applied once to the shared LVGL target)
 # ---------------------------------------------------------------------------
 if(EMSCRIPTEN)
-    target_compile_options(lvgl      PUBLIC "SHELL:-s USE_SDL=2")
-    target_compile_options(lvgl_sim  PRIVATE "SHELL:-s USE_SDL=2")
-
-    target_link_options(lvgl_sim PRIVATE
-        "SHELL:-s USE_SDL=2"
-        "SHELL:-s WASM=1"
-        "SHELL:-s ALLOW_MEMORY_GROWTH=1"
-        "SHELL:-s INITIAL_MEMORY=16777216"
-        "--shell-file" "${CMAKE_CURRENT_SOURCE_DIR}/shell_minimal.html"
-    )
-    set_target_properties(lvgl_sim PROPERTIES SUFFIX ".html")
+    target_compile_options(lvgl PUBLIC "SHELL:-s USE_SDL=2")
 else()
-    find_package(SDL2 REQUIRED)
-    target_link_libraries(lvgl_sim PRIVATE SDL2::SDL2)
+    find_package(SDL2 REQUIRED HINTS "/emsdk/upstream/emscripten/cache/ports/sdl2/SDL-release-2.32.10")
 endif()
+
+# ---------------------------------------------------------------------------
+# Per-app helper
+# ---------------------------------------------------------------------------
+include(cmake/lvgl_app.cmake)
+
+# ---------------------------------------------------------------------------
+# Apps
+# ---------------------------------------------------------------------------
+add_subdirectory(apps/hello_world)
+add_subdirectory(apps/counter)
+add_subdirectory(apps/shapes)
