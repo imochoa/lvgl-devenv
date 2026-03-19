@@ -17,7 +17,8 @@ configure:
         -- \
         emcmake cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 
-build:
+# Build all apps, or a single one: just build [hello_world]
+build target="":
     podman run --rm \
         -v "{{ justfile_directory() }}:/src" \
         -v emscripten-sdl2:/emsdk/upstream/emscripten/cache/ports/sdl2 \
@@ -27,7 +28,7 @@ build:
         -e "GIT_CONFIG_VALUE_0=*" \
         docker.io/emscripten/emsdk:latest \
         -- \
-        cmake --build ./build -j4
+        cmake --build ./build -j4{{ if target != "" { " --target " + target } else { "" } }}
 
 dev:
     podman run --rm -it \
@@ -39,6 +40,8 @@ dev:
         -e "GIT_CONFIG_VALUE_0=*" \
         --entrypoint bash \
         docker.io/emscripten/emsdk:latest
-server:
-  printf "%s\n" "http://127.0.0.1:35729/lvgl_sim.html"
-  uvx livereload --port 35729 ./build
+
+# Serve an app: just server hello_world
+serve app="hello_world":
+    printf "%s\n" "http://127.0.0.1:35729/{{ app }}/{{ app }}.html"
+    uvx livereload --port 35729 "./build/apps"
