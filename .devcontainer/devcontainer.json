@@ -27,8 +27,14 @@
       ],
       "settings": {
         // Use emcmake from terminal — CMake Tools can't invoke it automatically
-        "cmake.configureOnOpen": false,
-        "cmake.ignoreCMakeListsMissing": true,
+        // "cmake.configureOnOpen": false,
+        // "cmake.ignoreCMakeListsMissing": true,
+        // "cmake.sourceDirectory": [
+        //   "${workspaceFolder}",
+        //   "${workspaceFolder}/apps",
+        //   "${workspaceFolder}/apps/counter",
+        //   "${workspaceFolder}/apps/*"
+        // ],
         "redhat.telemetry.enabled": false,
         "editor.formatOnSave": true,
         "[c]": {

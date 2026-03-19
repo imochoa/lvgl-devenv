@@ -1,49 +1,19 @@
-{ // https://code.visualstudio.com/docs/cpp/customize-cpp-settings
-    "env": {
-        "myIncludePath": [
-            "${workspaceFolder}/include",
-            "${workspaceFolder}/src"
-        ],
-        "myCompilerPath": "/opt/toolchains/zephyr-sdk-0.16.8/xtensa-espressif_esp32s3_zephyr-elf/bin/xtensa-espressif_esp32s3_zephyr-elf-gcc",
-        "myDefines": [
-            "DEBUG",
-            "MY_FEATURE=1"
-        ]
-    },
+{
+    "version": 4,
     "configurations": [
         {
-            "name": "Zephyr Dev Container",
-            "compilerPath": "/opt/toolchains/zephyr-sdk-0.16.8/xtensa-espressif_esp32s3_zephyr-elf/bin/xtensa-espressif_esp32s3_zephyr-elf-gcc",
-            // "compileCommands": "${workspaceFolder}/build/compile_commands.json",
-            // "compileCommands": "${workspaceFolder}/apps/01_blink_ws2812/build/compile_commands.json",
-            "compileCommands": [
-                "build/compile_commands.json", // from practical zephyr. Does this work?
-                "/workspaces/zephyr-devcontainer/introduction-to-zephyr/workspace/apps/10_demo_epaper/build/compile_commands.json",
-                // "/workspaces/zephyr-devcontainer/apps/01_blink_ws2812/build/compile_commands.json",
-                "/workspaces/zephyr-devcontainer/introduction-to-zephyr/workspace/apps/01_blink_ws2812/build/compile_commands.json"
-            ],
-            // "intelliSenseMode": "linux-clang-x64",            
-            "includePath": [
-                "${workspaceFolder}/**",
-                // "/workspaces/zephyr-devcontainer/**",
-                // "${workspaceFolder:/opt/toolchains/zephyr}/**" // Refers to /opt/toolchains/zephyr
-                "/opt/toolchains/zephyr/**"
-            ],
-            // "defines": ["${myDefines}"],
-            "browse": {
-                "path": [
-                    // "${workspaceFolder:/workspace}/**",
-                    "${workspaceFolder}/**",
-                    // "${workspaceFolder:/opt/toolchains/zephyr}/**"
-                    // "/workspaces/zephyr-devcontainer/**",
-                    "/opt/toolchains/zephyr/**"
-                ],
-                "limitSymbolsToIncludedHeaders": true
-            },
+            "name": "LVGL Emscripten",
             "cStandard": "c11",
-            "cppStandard": "c++11"
+            "configurationProvider": "ms-vscode.cmake-tools",
+            "includePath": [
+                "${workspaceFolder}",
+                "${workspaceFolder}/shared",
+                "${workspaceFolder}/_deps/lvgl-src",
+                "${workspaceFolder}/_deps/lvgl-src/src"
+            ],
+            "defines": [
+                "LV_CONF_INCLUDE_SIMPLE"
+            ]
         }
-    ],
-    "version": 4,
-    "enableConfigurationSquiggles": true
+    ]
 }
